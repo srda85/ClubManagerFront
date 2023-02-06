@@ -1,0 +1,92 @@
+<div class="card">
+  <!--
+  <div class="card-header">Liste des élèves</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Trouver un élève:</div>
+      <div class="col-md4" >
+             Double relation grace au ngModel
+        <input type="text"
+               [(ngModel)]="filtreListe">
+      </div>
+    </div>
+
+ Table d'origine
+    <div class="table" *ngIf="eleves.length">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of elevesTrie ">
+        <td>{{item.nom}}</td>
+        <td>{{item.prenom}}</td>
+      </tr>
+      </tbody>
+    </div>
+    -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Tableau des statistiques</mat-card-title>
+  </mat-card-header>
+  <div class="container-fluid">
+    <mat-table matSort [dataSource]="dataMatTableStat" >
+
+      <ng-container matColumnDef="annee">
+        <mat-header-cell *matHeaderCellDef>Année</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.annee}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="mois">
+        <mat-header-cell *matHeaderCellDef>Mois</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.month}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nbrInscriptions">
+        <mat-header-cell *matHeaderCellDef>Abonnements</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.nbrInscriptions}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nbrElevesInscrits">
+        <mat-header-cell  *matHeaderCellDef>Eleves</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.nbrElevesInscrits}} </mat-cell>
+      </ng-container>
+
+<!--     A rajouter s'il veut les ceintures  -->
+<!--      <ng-container matColumnDef="nbrCeintureBlanche">-->
+<!--        <mat-header-cell *matHeaderCellDef>Ceinture Blanche</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row"> {{row.nbrCeintureBlanche}} </mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef="nbrCeintureBleue">-->
+<!--        <mat-header-cell *matHeaderCellDef>Ceinture Bleue</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row"> {{row.nbrCeintureBleue}} </mat-cell>-->
+<!--      </ng-container>-->
+
+<!--      <ng-container matColumnDef="nbrCeintureViolette">-->
+<!--        <mat-header-cell  *matHeaderCellDef>Ceinture Violette</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let row"> {{row.nbrCeintureViolette}} </mat-cell>-->
+<!--      </ng-container>-->
+
+      <ng-container matColumnDef="montantTotal">
+        <mat-header-cell *matHeaderCellDef>Montant mensuel</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.montantTotal}} </mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="displayedColumnsStat"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumnsStat"  ></mat-row>
+    </mat-table>
+    <mat-paginator #paginator
+                   [pageSize]="12"
+                   [pageSizeOptions]="[12,24,48]"
+                   showFirstLastButtons >
+    </mat-paginator>
+  </div>
+</mat-card>
+</div>
+

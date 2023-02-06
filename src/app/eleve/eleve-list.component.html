@@ -1,0 +1,52 @@
+<div class="card">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Tableau des élèves </mat-card-title>
+    </mat-card-header>
+    <div class="container-fluid">
+      <div class="container">
+        <mat-form-field appearance="standard">
+          <input matInput placeholder="rechercher.." autocomplete="off" (keyup)="filterData($event)">
+        </mat-form-field>
+      </div>
+        <mat-table matSort [dataSource]="dataMatTable" >
+
+          <ng-container matColumnDef="nom">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Nom</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.nom}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="prenom">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Prenom</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.prenom}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ceinture">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Ceinture</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.ceinture}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="statut">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Statut</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.statut}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lien">
+            <mat-header-cell mat-sort-header *matHeaderCellDef>Lien</mat-header-cell>
+            <mat-cell *matCellDef="let row"><button mat-raised-button color="primary" (click)="link(row.id)">Détails</button></mat-cell>
+          </ng-container>
+
+          <!-- Header and Row Declarations -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row
+            (click)="[routerLink]"
+            *matRowDef="let row; columns: displayedColumns"  ></mat-row>
+        </mat-table>
+      <mat-paginator #paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[20,50,100]"
+        showFirstLastButtons >
+      </mat-paginator>
+    </div>
+  </mat-card>
+</div>

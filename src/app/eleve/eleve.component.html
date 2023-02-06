@@ -1,0 +1,92 @@
+<!-- Mettre un Ng if car eleve est indéfini et il va mettre ne permanence une alerte dans la console HTML -->
+<div class="card" *ngIf="eleve">
+<mat-card>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <mat-card-title >{{eleve.nom + " " + eleve.prenom}}</mat-card-title>
+      <mat-card-subtitle>
+        <p>{{eleve.role}}</p>
+        <img src="https://picsum.photos/200">
+      </mat-card-subtitle>
+      <mat-card-actions>
+        <button mat-raised-button color="blue" (click)="retourLink()">Retour</button>
+        <button mat-raised-button color="primary" (click)="updateLink()" >Editer</button>
+        <button mat-raised-button color="warn" (click)="openDialog()">Supprimer</button>
+      </mat-card-actions>
+    </div>
+    <div class="col-md-4">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item><b>ID</b> : {{eleve.id}}</mat-list-item>
+          <mat-list-item><b>Date de naissance</b> : {{eleve.dateNaissance|date:'dd / MM / yyyy'}} </mat-list-item>
+          <mat-list-item><b>Adresse</b> : {{eleve.adresse}} </mat-list-item>
+          <mat-list-item><b>Ceinture</b> : {{eleve.ceinture}} </mat-list-item>
+          <mat-list-item><b>Email</b> : {{eleve.email}} </mat-list-item>
+          <mat-list-item><b>Gsm</b> : {{eleve.gsm}} </mat-list-item>
+          <mat-list-item><b>Statut</b> : {{eleve.statut}} </mat-list-item>
+<!--          <mat-list-item>Id abos : {{eleve.abonnementsId}} A SUPPRIMER </mat-list-item>-->
+        </mat-list>
+      </mat-card-content>
+    </div>
+  </div>
+</mat-card>
+</div>
+
+
+<div class="card" *ngIf="eleve">
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title><button mat-raised-button color="" (click)="ajouterUnAbonnement()" [disabled]="eleve.role=='coach'">Ajouter un abonnement</button></mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    <mat-table matSort [dataSource]="dataMatableAbonnements" >
+
+      <ng-container matColumnDef="debutAbonnement">
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Début</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.debutAbonnement|date:'dd / MMM / yyyy'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="finAbonnement">
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Fin</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.finAbonnement|date:'dd / MMM / yyyy'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="montant">
+        <mat-header-cell mat-sort-header *matHeaderCellDef>Montant</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.montant}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="boutons">
+        <mat-header-cell mat-sort-header *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="btn-group">
+            <button style="margin-right:20px" mat-raised-button color="primary" (click)="editerUnAbonnement(row.id)">Editer</button>
+            <button mat-raised-button color="warn" (click)="openDialogAbo(row.id)" >Supprimer</button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns"  ></mat-row>
+    </mat-table>
+    <mat-paginator #paginator
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5,10,20]"
+                   showFirstLastButtons >
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>
+</div>
+
+
+
+
+
+
+
+
+
+

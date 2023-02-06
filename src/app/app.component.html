@@ -1,0 +1,18 @@
+<div>
+  <nav mat-tab-nav-bar backgroundColor="primary">
+    <!--          avant /welcome-->
+    <a mat-tab-link routerLink="welcome" >
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home">Acceuil</mat-icon>
+    </a>
+<!--    slash pas nécéssaire -->
+    <a mat-tab-link  routerLink="eleve" >Eleves</a>
+    <a mat-tab-link  routerLink="abonnement" >Abonnements</a>
+    <a mat-tab-link  routerLink="statistic" >Statistiques</a>
+    <a mat-tab-link  routerLink="inscription" >Inscriptions</a>
+    <a mat-tab-link  routerLink="login">Login</a>
+  </nav>
+
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

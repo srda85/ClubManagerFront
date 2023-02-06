@@ -1,0 +1,84 @@
+<div class="card">
+  <mat-card class="mat-card">
+    <form [formGroup]="eleveForm" class="form-container">
+      <mat-card-header>
+        <mat-card-title>Fiche d'inscription :</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input formControlName="nom" matInput placeholder="Nom">
+              <mat-error *ngIf="eleveForm.controls['nom'].hasError('required')">Ce champ est obligatoire</mat-error>
+              <mat-error *ngIf="eleveForm.controls['nom'].hasError('pattern')"> Caractères non autorisés </mat-error>
+              <mat-error *ngIf="eleveForm.controls['nom'].hasError('minLength')">Il faut au moins un charactère </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input  formControlName="prenom" matInput placeholder="Prenom">
+              <mat-error *ngIf="eleveForm.controls['prenom'].hasError('required')">Ce champ est obligatoire</mat-error>
+              <mat-error *ngIf="eleveForm.controls['prenom'].hasError('pattern')"> Caractères non autorisés </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <!--            Changer le controle name de chaques -->
+              <textarea  formControlName="adresse" matInput placeholder="Adresse"></textarea>
+              <mat-error *ngIf="eleveForm.controls['adresse'].hasError('required')">Ce champ est obligatoire</mat-error>
+              <mat-error *ngIf="eleveForm.controls['adresse'].hasError('pattern')"> Caractères non autorisés </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Date de naissance</mat-label>
+              <input  formControlName="dateNaissance" matInput [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error >Ce champ est obligatoire</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input  formControlName="gsm" matInput placeholder="Téléphone"  >
+              <mat-error>Ce champ est obligatoire</mat-error>
+              <mat-error *ngIf="eleveForm.controls['gsm'].hasError('minlength')">Le nombre de chiffre est insuffisant</mat-error>
+              <mat-error *ngIf="eleveForm.controls['gsm'].hasError('pattern')">Caractères non autorisés</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input  formControlName="email" matInput placeholder="Email">
+              <mat-error>Adresse email invalide</mat-error>
+            </mat-form-field>
+            <!--          <mat-error *ngIf="inscriptionControl.hasError('required')">Veuillez remplir ce champ</mat-error>-->
+          </div>
+            <div class="col-sm-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                  <mat-option *ngFor="let item of role" [value]="item">{{item}}</mat-option>
+                </mat-select>
+                <mat-error >Ce champ est obligatoire</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Ceinture</mat-label>
+              <mat-select formControlName="ceinture">
+                <mat-option *ngFor="let item of ceinture" [value]="item">{{item}}</mat-option>
+              </mat-select>
+              <mat-error >Ce champ est obligatoire</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="onSubmit()"  mat-raised-button color="primary">Sauvegarder</button>
+        <button (click)="clearForm()" mat-raised-button color="warn">Effacer</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
